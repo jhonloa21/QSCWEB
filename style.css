@@ -1,0 +1,316 @@
+:root {
+    /* Custom Properties */
+    --white: #FFFFFF;
+    --blue: #9cc5e7;
+    --blue-dark: #5c8097;
+    --dark: #212121;
+    --primary: #1b26c4;
+    --gray-light: #ccd3d4;
+    --gray-dark: #757575;
+
+    /* Typography */
+    --font-size-large: 3.8rem;
+    --font-size-medium: 2.8rem;
+    --font-size-small: 1.8rem;
+
+    /* Spacing */
+    --spacing-small: 0.8rem;
+    --spacing-medium: 1.6rem;
+    --spacing-large: 3.2rem;
+
+    /* Layout */
+    --container-width: 1200px; /* Ancho estándar para el contenedor */
+}
+
+@media (max-width: 768px) {
+    :root {
+        --container-width: 90%; /* Ajuste responsivo */
+        --font-size-large: 2.8rem;
+        --font-size-medium: 2.2rem;
+        --font-size-small: 1.6rem;
+    }
+}
+
+/* Reset y estilos generales */
+html {
+    font-size: 62.5%;
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+/* Definir la fuente en el body o para elementos específicos */
+body {
+    font-family: 'Inter', sans-serif; /* Aplica la fuente Inter */
+    margin: 0;
+    padding: 0;
+}
+
+/* También puedes aplicarla a títulos o secciones específicas */
+h1, h2, h3 {
+    font-family: 'Inter', sans-serif;
+}
+
+h1 {
+    font-size: var(--font-size-large);
+}
+
+h2 {
+    font-size: var(--font-size-medium);
+}
+
+h3 {
+    font-size: var(--font-size-small);
+}
+
+h1,
+h2,
+h3 {
+    text-align: center;
+    color: var(--dark);
+}
+
+/* Contenedor estándar */
+.container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 var(--spacing-medium); /* Espacio lateral opcional */
+}
+
+header {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.8); /* Sombra sutil */
+    padding: 0 20px;
+    position: relative; /* Para posicionar el menu-toggle en móvil */
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-small) 0;
+}
+
+.nav-content { /* Contenedor para pantallas grandes */
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 14vw; /* Ajusta el logo al 15% del ancho de la ventana */
+    height: auto;
+}
+
+.logo-mobile {
+    display: none; /* Oculto por defecto en pantallas grandes */
+}
+
+@media (max-width: 768px) { /* Ajusta el breakpoint según tus necesidades */
+    .logo-desktop {
+        display: none;
+    }
+    .logo-mobile {
+        display: block;
+    }
+}
+
+/* Estilos para la lista de navegación */
+.nav-links {
+    list-style: none; /* Elimina los puntos */
+    display: flex; /* Alinea los elementos horizontalmente */
+    gap: 3.5rem; /* Aumenta el espacio entre los elementos */
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilos para los enlaces en el navbar */
+.nav-links a {
+    text-decoration: none;
+    color: var(--dark);
+    font-size: var(--font-size-small);
+    transition: color 0.3s ease;
+}
+
+/* Efecto hover en los enlaces */
+.nav-links a:hover {
+    color: var(--blue);
+}
+
+/* Estilos para el botón de quote */
+.quote-btn a:focus {
+    outline: 2px dashed var(--primary);
+    outline-offset: 4px;
+}
+
+.quote-btn {
+    display: inline-block;
+    position: relative;
+}
+
+.quote-btn a {
+    display: inline-block;
+    padding: 12px 24px;
+    border-radius: 18px;
+    background-color: var(--blue);
+    color: var(--white);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    font-size: var(--font-size-small);
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    position: relative;
+    z-index: 1;
+}
+
+.quote-btn a:hover {
+    background-color: var(--white);
+    color: var(--blue);
+    border: 2px solid var(--blue);
+}
+
+.quote-btn:hover::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border-radius: 24px;
+    background-color: var(--blue);
+    animation: pulse 0.8s 1 forwards;
+    z-index: 0;
+    pointer-events: none;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.8);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1.2);
+        opacity: 0;
+    }
+}
+
+/* Media query para tablets y móviles */
+@media (min-width: 481px) and (max-width: 768px) {
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: fixed;
+        top: 122px;
+        right: 0;
+        width: 250px;
+        height: calc(100% - 70px);
+        background-color: #f0f0f0;
+        padding: 20px;
+        transform: translateX(100%);
+        transition: transform 0.3s ease-in-out;
+        z-index: 2;
+        overflow-y: auto;
+    }
+
+    .nav-links.active {
+        display: flex; /* Muestra el menú cuando tiene la clase 'active' */
+        transform: translateX(0); /* Lo trae a la vista */
+    }
+
+    .nav-links li {
+        margin: 10px 0;
+        text-align: center;
+    }
+
+    .nav-links.active {
+        transform: translateX(0);
+    }
+}
+
+/* Media query para tablets y móviles */
+@media (max-width: 480px) {
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: fixed;
+        top: 70px;
+        right: 0;
+        width: 250px;
+        height: calc(100% - 70px);
+        background-color: #f0f0f0;
+        padding: 20px;
+        transform: translateX(100%);
+        transition: transform 0.3s ease-in-out;
+        z-index: 2;
+        overflow-y: auto;
+    }
+
+    .nav-links.active {
+        display: flex; /* Muestra el menú cuando tiene la clase 'active' */
+        transform: translateX(0); /* Lo trae a la vista */
+    }
+
+    .nav-links li {
+        margin: 10px 0;
+        text-align: center;
+    }
+
+    .nav-links.active {
+        transform: translateX(0);
+    }
+}
+
+/* Menú hamburguesa */
+.menu-toggle {
+    display: none; /* Oculto por defecto */
+    cursor: pointer;
+    padding: 10px;
+}
+
+.menu-toggle .bar {
+    width: 30px;
+        height: 3px;
+        background-color: #333;
+        margin: 5px 0;
+        transition: 0.3s;
+}
+
+/* Estilos para el menú hamburguesa en móviles */
+@media (max-width: 768px) {
+    /* Mostrar el menú hamburguesa */
+    .menu-toggle {
+        display: block;
+    }
+
+    .menu-toggle.active .bar:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .menu-toggle.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-toggle.active .bar:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+    }
+}
+
+/* Estilos para la sección de imagen */
+.hero-image {
+    width: 100%;
+    height: 100vh;
+    background-image: url('/img/Background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0 auto; /* Eliminar el margen superior */
+}
